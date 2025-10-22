@@ -1,0 +1,4 @@
+project_id = "8dc168a7-5d1b-472b-b12a-12f40fc0cd00"
+
+[functions.realtime-speaking]
+verify_jwt = false

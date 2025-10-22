@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Mic, Brain, Trophy, TrendingUp, Volume2, Target } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import { Badge } from "@/components/ui/badge";
+import VoiceInterface from "@/components/VoiceInterface";
 
 const PublicSpeaking = () => {
   const practices = [
@@ -159,6 +160,8 @@ const PublicSpeaking = () => {
           </CardContent>
         </Card>
       </div>
+
+      <VoiceInterface />
     </div>
   );
 };
