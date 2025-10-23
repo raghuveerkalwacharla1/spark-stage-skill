@@ -1,9 +1,10 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Mic, Brain, Trophy, TrendingUp, Volume2, Target } from "lucide-react";
+import { Mic, Brain, Trophy, TrendingUp, Volume2, Target, Sparkles, PlayCircle, MessageCircle, CheckCircle } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import { Badge } from "@/components/ui/badge";
 import VoiceInterface from "@/components/VoiceInterface";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const PublicSpeaking = () => {
   const practices = [
@@ -18,6 +19,53 @@ const PublicSpeaking = () => {
     { metric: "Confidence", score: 78, change: "+8%" },
     { metric: "Pacing", score: 92, change: "+15%" },
     { metric: "Engagement", score: 88, change: "+10%" },
+  ];
+
+  const speakingSteps = [
+    {
+      title: "Warm-Up Exercises",
+      desc: "Prepare your voice and body",
+      icon: Sparkles,
+      tools: [
+        { name: "Vocal Warm-Ups", desc: "Breathing and voice exercises" },
+        { name: "Tongue Twisters", desc: "Improve articulation and clarity" },
+        { name: "Posture Guide", desc: "Body language for confident speaking" },
+        { name: "Energy Boost", desc: "Quick exercises to energize delivery" }
+      ]
+    },
+    {
+      title: "Choose Practice Module",
+      desc: "Select the type of speaking you want to practice",
+      icon: Target,
+      tools: [
+        { name: "Impromptu Speaking", desc: "Think and speak on the spot" },
+        { name: "Persuasive Speech", desc: "Convince and influence your audience" },
+        { name: "Storytelling", desc: "Engage with compelling narratives" },
+        { name: "Professional Presentations", desc: "Business and formal settings" }
+      ]
+    },
+    {
+      title: "Record & Practice",
+      desc: "Speak with AI coach listening",
+      icon: PlayCircle,
+      tools: [
+        { name: "Real-Time AI Coach", desc: "Get live feedback as you speak" },
+        { name: "Filler Word Detector", desc: "Identify 'um', 'uh', 'like' usage" },
+        { name: "Pacing Monitor", desc: "Visual cues for speaking speed" },
+        { name: "Confidence Meter", desc: "Track your vocal confidence" }
+      ]
+    },
+    {
+      title: "Review AI Feedback",
+      desc: "Analyze performance and improve",
+      icon: MessageCircle,
+      tools: [
+        { name: "Detailed Analysis", desc: "Comprehensive feedback report" },
+        { name: "Improvement Tips", desc: "Personalized suggestions" },
+        { name: "Score Tracking", desc: "Monitor progress over time" },
+        { name: "Comparison Tool", desc: "See before and after improvements" }
+      ]
+    }
   ];
 
   return (
@@ -66,6 +114,54 @@ const PublicSpeaking = () => {
             );
           })}
         </div>
+
+        <Card className="mb-8 bg-gradient-card">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Mic className="w-6 h-6 text-speaking" />
+              Getting Started Guide
+            </CardTitle>
+            <CardDescription>Click on each step to explore tools and features</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Accordion type="single" collapsible className="w-full">
+              {speakingSteps.map((step, idx) => {
+                const Icon = step.icon;
+                return (
+                  <AccordionItem key={idx} value={`step-${idx}`}>
+                    <AccordionTrigger className="hover:no-underline">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-speaking/10 flex items-center justify-center flex-shrink-0">
+                          <Icon className="w-5 h-5 text-speaking" />
+                        </div>
+                        <div className="text-left">
+                          <h3 className="font-semibold">{step.title}</h3>
+                          <p className="text-sm text-muted-foreground">{step.desc}</p>
+                        </div>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <div className="pt-4 space-y-3">
+                        {step.tools.map((tool, toolIdx) => (
+                          <div key={toolIdx} className="flex items-start gap-3 p-3 rounded-lg bg-background hover:bg-secondary transition-colors">
+                            <CheckCircle className="w-5 h-5 text-speaking flex-shrink-0 mt-0.5" />
+                            <div>
+                              <p className="font-medium">{tool.name}</p>
+                              <p className="text-sm text-muted-foreground">{tool.desc}</p>
+                            </div>
+                          </div>
+                        ))}
+                        <Button className="w-full mt-4 bg-speaking hover:bg-speaking/90">
+                          Start This Step
+                        </Button>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                );
+              })}
+            </Accordion>
+          </CardContent>
+        </Card>
 
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           <Card className="bg-gradient-card">

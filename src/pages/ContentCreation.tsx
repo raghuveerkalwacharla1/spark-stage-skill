@@ -1,7 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Video, FileVideo, Scissors, Sparkles, Play, Download } from "lucide-react";
+import { Video, FileVideo, Scissors, Sparkles, Play, Download, CheckCircle, Palette, Wand2 } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const ContentCreation = () => {
   const templates = [
@@ -12,10 +13,47 @@ const ContentCreation = () => {
   ];
 
   const steps = [
-    { title: "Plan Your Content", desc: "Define your message and target audience", icon: "📋" },
-    { title: "Choose a Template", desc: "Select from our professionally designed templates", icon: "🎨" },
-    { title: "Record & Edit", desc: "Use our intuitive editing tools", icon: "🎬" },
-    { title: "Export & Share", desc: "Download in multiple formats", icon: "📤" },
+    { 
+      title: "Plan Your Content", 
+      desc: "Define your message and target audience", 
+      icon: "📋",
+      tools: [
+        { name: "Content Brief Template", desc: "Structure your ideas effectively" },
+        { name: "Audience Analyzer", desc: "Understand who you're creating for" },
+        { name: "Script Generator", desc: "AI-powered script writing assistance" }
+      ]
+    },
+    { 
+      title: "Choose a Template", 
+      desc: "Select from our professionally designed templates", 
+      icon: "🎨",
+      tools: [
+        { name: "Template Library", desc: "100+ professional video templates" },
+        { name: "Style Customizer", desc: "Adjust colors, fonts, and layouts" },
+        { name: "Brand Kit", desc: "Save your brand colors and logos" }
+      ]
+    },
+    { 
+      title: "Record & Edit", 
+      desc: "Use our intuitive editing tools", 
+      icon: "🎬",
+      tools: [
+        { name: "Screen Recorder", desc: "Capture your screen and webcam" },
+        { name: "Video Trimmer", desc: "Cut and arrange clips precisely" },
+        { name: "Transition Effects", desc: "Smooth scene transitions" },
+        { name: "Audio Mixer", desc: "Balance voice and background music" }
+      ]
+    },
+    { 
+      title: "Export & Share", 
+      desc: "Download in multiple formats", 
+      icon: "📤",
+      tools: [
+        { name: "Multi-Format Export", desc: "MP4, MOV, WebM formats" },
+        { name: "Quality Optimizer", desc: "Optimize for different platforms" },
+        { name: "Direct Upload", desc: "Share to YouTube, Vimeo instantly" }
+      ]
+    },
   ];
 
   return (
@@ -61,17 +99,40 @@ const ContentCreation = () => {
               <Scissors className="w-6 h-6 text-content" />
               Getting Started Guide
             </CardTitle>
+            <CardDescription>Click on each step to explore tools and features</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Accordion type="single" collapsible className="w-full">
               {steps.map((step, idx) => (
-                <div key={idx} className="text-center">
-                  <div className="text-4xl mb-3">{step.icon}</div>
-                  <h3 className="font-semibold mb-2">{step.title}</h3>
-                  <p className="text-sm text-muted-foreground">{step.desc}</p>
-                </div>
+                <AccordionItem key={idx} value={`step-${idx}`}>
+                  <AccordionTrigger className="hover:no-underline">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl">{step.icon}</span>
+                      <div className="text-left">
+                        <h3 className="font-semibold">{step.title}</h3>
+                        <p className="text-sm text-muted-foreground">{step.desc}</p>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="pt-4 space-y-3">
+                      {step.tools.map((tool, toolIdx) => (
+                        <div key={toolIdx} className="flex items-start gap-3 p-3 rounded-lg bg-background hover:bg-secondary transition-colors">
+                          <CheckCircle className="w-5 h-5 text-content flex-shrink-0 mt-0.5" />
+                          <div>
+                            <p className="font-medium">{tool.name}</p>
+                            <p className="text-sm text-muted-foreground">{tool.desc}</p>
+                          </div>
+                        </div>
+                      ))}
+                      <Button className="w-full mt-4 bg-content hover:bg-content/90">
+                        Start This Step
+                      </Button>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </div>
+            </Accordion>
           </CardContent>
         </Card>
 
