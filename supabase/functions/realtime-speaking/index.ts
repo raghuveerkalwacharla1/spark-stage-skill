@@ -42,7 +42,24 @@ serve(async (req) => {
           type: "session.update",
           session: {
             modalities: ["text", "audio"],
-            instructions: "You are a helpful public speaking coach. Provide constructive feedback on speaking practice, help improve communication skills, and offer encouragement. Keep responses concise and actionable.",
+            instructions: `You are an expert public speaking coach conducting a live practice session. 
+
+Your role:
+1. LISTEN carefully to the user's speech
+2. ANALYZE their speaking style, pace, clarity, and content
+3. PROVIDE specific, constructive feedback after they finish speaking
+4. ENCOURAGE them and highlight what they did well
+5. SUGGEST one specific improvement they can make
+
+Keep your feedback conversational and encouraging. Focus on:
+- Pace and rhythm
+- Vocal variety and energy
+- Clarity and articulation
+- Use of pauses
+- Content structure
+- Confidence and delivery
+
+After giving feedback, prompt them to try again or practice a specific technique.`,
             voice: "alloy",
             input_audio_format: "pcm16",
             output_audio_format: "pcm16",
@@ -53,13 +70,14 @@ serve(async (req) => {
               type: "server_vad",
               threshold: 0.5,
               prefix_padding_ms: 300,
-              silence_duration_ms: 1000
+              silence_duration_ms: 1200
             },
-            temperature: 0.8
+            temperature: 0.8,
+            max_response_output_tokens: 500
           }
         };
         openAISocket?.send(JSON.stringify(sessionConfig));
-        console.log("Sent session.update");
+        console.log("Sent session.update with coaching instructions");
       }
       
       // Forward all messages to client
