@@ -15,7 +15,7 @@ const PublicSpeaking = () => {
   ];
 
   const improvements = [
-    { metric: "Clarity", score: 85, change: "+12%" },
+    { metric: "Clarity", score: 83, change: "+12%" },
     { metric: "Confidence", score: 78, change: "+8%" },
     { metric: "Pacing", score: 92, change: "+15%" },
     { metric: "Engagement", score: 88, change: "+10%" },
