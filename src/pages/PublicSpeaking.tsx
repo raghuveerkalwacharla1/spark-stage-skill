@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Mic, Brain, Trophy, TrendingUp, Volume2, Target, Sparkles, PlayCircle, MessageCircle, CheckCircle } from "lucide-react";
@@ -5,8 +6,13 @@ import Navigation from "@/components/Navigation";
 import { Badge } from "@/components/ui/badge";
 import VoiceInterface from "@/components/VoiceInterface";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { PracticeSessionModal } from "@/components/PracticeSessionModal";
+import { SessionHistory } from "@/components/SessionHistory";
 
 const PublicSpeaking = () => {
+  const [practiceModalOpen, setPracticeModalOpen] = useState(false);
+  const [selectedDifficulty, setSelectedDifficulty] = useState<'Beginner' | 'Intermediate' | 'Advanced'>('Beginner');
+
   const practices = [
     { title: "Impromptu Speaking", level: "Beginner", time: "5 min", icon: Mic },
     { title: "Persuasive Speech", level: "Intermediate", time: "10 min", icon: Target },
@@ -106,7 +112,13 @@ const PublicSpeaking = () => {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <Button className="w-full bg-speaking hover:bg-speaking/90">
+                  <Button 
+                    className="w-full bg-speaking hover:bg-speaking/90"
+                    onClick={() => {
+                      setSelectedDifficulty(practice.level as 'Beginner' | 'Intermediate' | 'Advanced');
+                      setPracticeModalOpen(true);
+                    }}
+                  >
                     Start Practice
                   </Button>
                 </CardContent>
@@ -230,6 +242,8 @@ const PublicSpeaking = () => {
           </Card>
         </div>
 
+        <SessionHistory />
+
         <Card className="bg-gradient-card">
           <CardHeader>
             <CardTitle>Language Improvement Sessions</CardTitle>
@@ -256,6 +270,12 @@ const PublicSpeaking = () => {
           </CardContent>
         </Card>
       </div>
+
+      <PracticeSessionModal
+        open={practiceModalOpen}
+        onOpenChange={setPracticeModalOpen}
+        difficulty={selectedDifficulty}
+      />
 
       <VoiceInterface />
     </div>
