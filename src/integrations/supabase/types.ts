@@ -14,7 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      practice_sessions: {
+        Row: {
+          ai_feedback: Json | null
+          audio_url: string | null
+          clarity_score: number | null
+          confidence_score: number | null
+          created_at: string
+          difficulty: string | null
+          duration_seconds: number
+          filler_word_count: number | null
+          id: string
+          topic: string
+          transcript: string | null
+          updated_at: string
+          user_id: string
+          vocal_variety_score: number | null
+          word_count: number | null
+        }
+        Insert: {
+          ai_feedback?: Json | null
+          audio_url?: string | null
+          clarity_score?: number | null
+          confidence_score?: number | null
+          created_at?: string
+          difficulty?: string | null
+          duration_seconds: number
+          filler_word_count?: number | null
+          id?: string
+          topic: string
+          transcript?: string | null
+          updated_at?: string
+          user_id: string
+          vocal_variety_score?: number | null
+          word_count?: number | null
+        }
+        Update: {
+          ai_feedback?: Json | null
+          audio_url?: string | null
+          clarity_score?: number | null
+          confidence_score?: number | null
+          created_at?: string
+          difficulty?: string | null
+          duration_seconds?: number
+          filler_word_count?: number | null
+          id?: string
+          topic?: string
+          transcript?: string | null
+          updated_at?: string
+          user_id?: string
+          vocal_variety_score?: number | null
+          word_count?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
